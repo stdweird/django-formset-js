@@ -99,6 +99,7 @@
     $form.data(pluginName + '__formPrefix', prefix);
 
     var $delete = $form.find('[name=' + prefix + '-DELETE]');
+    $delete.parent().hide()
     var $order = $form.find('[name=' + prefix + '-ORDER]');
 
     var onChangeDelete = function () {
