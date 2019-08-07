@@ -32,7 +32,7 @@
     // Set up the existing forms
     this.$forms().each(function (i, form) {
       var $form = $(form);
-      _this.bindForm($(this), i);
+      _this.bindForm(_this.$formset, $(this), i);
     });
 
     // Fill "ORDER" fields with the current order
@@ -93,7 +93,7 @@
   /**
   * Attach any events needed to a new form
   */
-  Formset.prototype.bindForm = function ($form, index) {
+  Formset.prototype.bindForm = function ($formset, $form, index) {
     var _this = this;
 
     var prefix = this.formsetPrefix + '-' + index;
@@ -113,6 +113,7 @@
           $(this).data(pluginName + '-field-pattern', pattern).removeAttr('pattern');
         });
         $form.trigger('formDeleted');
+        $formset.trigger('formDeleted')
       } else {
         $form.removeAttr('data-formset-form-deleted');
         // Restore required property and pattern attributes from data field
@@ -126,6 +127,7 @@
           }
         });
         $form.trigger('formAdded');
+        $formset.trigger('formAdded')
       }
     }
 
