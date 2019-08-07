@@ -312,13 +312,7 @@
   };
 
   Formset.prototype.hideForms = function () {
-    this.$formset.on('formAdded', this.opts.form, function () {
-      var $form = $(this);
-      if ($form.attr("data-formset-created-at-runtime") == "true") {
-        $form.hide()
-      }
-      return false;
-    }).on('formDeleted', this.opts.form, function () {
+    this.$formset.on('formDeleted', this.opts.form, function () {
       var $form = $(this);
       $form.hide()
       return false;
