@@ -41,7 +41,7 @@
     // Store a reference to this in the formset element
     this.$formset.data(pluginName, this);
 
-    var extras = ['animateForms'];
+    var extras = ['animateForms', 'hideForms'];
     $.each(extras, function (i, extra) {
       if ((extra in _this.opts) && (_this.opts[extra])) {
         _this[extra]();
@@ -59,6 +59,7 @@
     moveDownButton: '[data-formset-move-down-button]',
     hasMaxFormsClass: 'has-max-forms',
     animateForms: false,
+    hideForms: false,
     reorderMode: 'none',
     empty_prefix: '__prefix__'
   };
@@ -309,6 +310,21 @@
     }
     return false;
   };
+
+  Formset.prototype.hideForms = function () {
+    this.$formset.on('formAdded', this.opts.form, function () {
+      var $form = $(this);
+      if ($form.attr("data-formset-created-at-runtime") == "true") {
+        $form.hide()
+      }
+      return false;
+    }).on('formDeleted', this.opts.form, function () {
+      var $form = $(this);
+      $form.hide()
+      return false;
+    });
+    this.$forms().filter('[data-formset-form-deleted]').hide()
+  }
 
   Formset.prototype.animateForms = function () {
     this.$formset.on('formAdded', this.opts.form, function () {
