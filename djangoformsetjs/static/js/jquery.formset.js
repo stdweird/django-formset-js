@@ -81,7 +81,7 @@
     this.$body.append($newFormFragment);
 
     var $newForm = $newFormFragment.filter(this.opts.form);
-    this.bindForm($newForm, newIndex);
+    this.bindForm(this.$formset, $newForm, newIndex);
 
     var prefix = this.formsetPrefix + '-' + newIndex;
     $newForm.find('[name=' + prefix + '-ORDER]').val(newIndex);
